@@ -25,7 +25,7 @@ public class Trie {
         for(int i = 0; i < text.length(); i++){
             char character = text.charAt(i);
             TrieNode node = new TrieNode();
-            if(root.getChildren().containsKey(character)){
+            if(child.containsKey(character)){
                 node = child.get(character);
             } else {
                 //node = new TrieNode();
