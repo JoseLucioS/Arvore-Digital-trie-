@@ -7,7 +7,7 @@ public class TrieNode {
 
     public TrieNode(){
         this.isWord = false;
-        this.children = null;
+        this.children = new HashMap<Character, TrieNode>();
         this.text = "";
     }
 
