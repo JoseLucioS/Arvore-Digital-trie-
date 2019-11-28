@@ -3,6 +3,10 @@ import java.util.*;
 public class Trie {
     private TrieNode root;
 
+    public TrieNode getRoot() {
+        return root;
+    }
+
     //construtor padrao
     public Trie(){
         this.root = new TrieNode();
@@ -34,6 +38,9 @@ public class Trie {
 
     //busca funcionando
     public boolean search(String text){
+        if(text == null || text.length() == 0){
+            return false;
+        }
 
         HashMap<Character, TrieNode> child = root.getChildren();
         TrieNode node = null;
@@ -94,14 +101,23 @@ public class Trie {
     public List autocomplete(String prefix){
         HashMap<Character, TrieNode> child = root.getChildren();
         List<String> words = new ArrayList<String>();
-        String word;
+        StringBuilder word = new StringBuilder();
         TrieNode node;
 
         //percorrer até achar node com o último caracter do prefixo, só então começar a procurar por palavras
         //correspondentes e guardá-las no arraylist
-//        for(){
-//
-//        }
+        for(int i = 0; i < prefix.length(); i++){
+            char character = prefix.charAt(i);
+            if(child.containsKey(character)){
+                word.append(character);
+                node = child.get(character);
+                child = node.getChildren();
+            } else {
+                System.out.println("Não existem palavras com esse prefixo");
+            }
+        }
+
+        
 
         Collections.sort(words);
         return words;

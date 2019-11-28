@@ -20,5 +20,6 @@ public class Main {
 
         trie.remove("amado");
         System.out.println("achou amadores? " + trie.search("amadores"));
+
     }
 }
