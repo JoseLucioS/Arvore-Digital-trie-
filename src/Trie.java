@@ -1,28 +1,19 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Trie {
     private TrieNode root;
 
-    //construtor
+    //construtor padrao
     public Trie(){
         this.root = new TrieNode();
     }
 
-    //getter
-    public TrieNode getRoot() {
-        return root;
-    }
-
-    //setter
-    public void setRoot(TrieNode root){
-        this.root = root;
-    }
-
     //inserção funcionando
     public void insert(String text){
+        if(text == null || text.length() == 0){
+            return;
+        }
+
         HashMap<Character, TrieNode> child = root.getChildren();
         for(int i = 0; i < text.length(); i++){
             char character = text.charAt(i);
@@ -30,7 +21,7 @@ public class Trie {
             if(child.containsKey(character)){
                 node = child.get(character);
             } else {
-
+                node.setText(character);
                 child.put(character, node);
             }
             child = node.getChildren();
@@ -43,6 +34,7 @@ public class Trie {
 
     //busca funcionando
     public boolean search(String text){
+
         HashMap<Character, TrieNode> child = root.getChildren();
         TrieNode node = null;
 
@@ -65,17 +57,41 @@ public class Trie {
 
     }
 
-    //TODO fazer o método de remoção
+    //remoção funcionando
     public void remove(String text){
-        if(this.search(text)){
-            
-        } else {
+        HashMap<Character, TrieNode> child = root.getChildren();
+        TrieNode node = new TrieNode();
+        List<TrieNode> list = new ArrayList<>(text.length());
 
+        if(search(text)){
+            for(int i = 0; i < text.length(); i++) {
+                char character = text.charAt(i);
+                node = child.get(character);
+                child = node.getChildren();
+                list.add(node);
+
+            }
+
+//            int size = list.size();
+//            list.get(size-1).setWord(false);
+
+            for (int i = list.size()-1; i > 0; i--) {
+                if (list.get(i).getChildren().isEmpty() && !list.get(i).isWord()) {
+                    list.get(i-1).getChildren().remove(list.get(i).getText());
+                    list.remove(i);
+                } else {
+                    list.get(i).setWord(false);
+                    break;
+                }
+            }
+        } else {
+            System.out.println("palavra inexistente");
         }
+
     }
 
     //TODO fazer método de autocompletar
-    public List<String> autocomplete(String prefix){
+    public List autocomplete(String prefix){
         HashMap<Character, TrieNode> child = root.getChildren();
         List<String> words = new ArrayList<String>();
         String word;

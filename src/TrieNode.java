@@ -3,12 +3,17 @@ import java.util.HashMap;
 public class TrieNode {
     private boolean isWord;
     private HashMap<Character, TrieNode> children;
-    private String text;
+    private char text;
 
     public TrieNode(){
         this.isWord = false;
         this.children = new HashMap<Character, TrieNode>();
-        this.text = "";
+    }
+
+    public TrieNode(char text){
+        this.isWord = false;
+        this.children = new HashMap<Character, TrieNode>();
+        this.text = text;
     }
 
     public boolean isWord() {
@@ -27,11 +32,11 @@ public class TrieNode {
         this.children = children;
     }
 
-    public String getText() {
+    public char getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(char text) {
         this.text = text;
     }
 }

@@ -9,8 +9,16 @@ public class Main {
         trie.insert("amado");
         trie.insert("ameba");
         trie.insert("arvore");
-        trie.insert("digital");
+        trie.insert("amadores");
 
-        System.out.println("achou amador? " + trie.search("amador"));
+        System.out.println("achou amado? " + trie.search("amado"));
+        System.out.println("achou amadores? " + trie.search("amadores"));
+
+        trie.remove("amado");
+        System.out.println("após remoção:");
+        System.out.println("achou amado? " + trie.search("amado"));
+
+        trie.remove("amado");
+        System.out.println("achou amadores? " + trie.search("amadores"));
     }
 }
