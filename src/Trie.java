@@ -18,8 +18,7 @@ public class Trie {
         this.root = root;
     }
 
-    //TODO fazer os métodos de inserção, busca e remoção
-    //testar esse método para ver se funciona
+    //inserção funcionando
     public void insert(String text){
         HashMap<Character, TrieNode> child = root.getChildren();
         for(int i = 0; i < text.length(); i++){
@@ -28,7 +27,7 @@ public class Trie {
             if(child.containsKey(character)){
                 node = child.get(character);
             } else {
-                //node = new TrieNode();
+
                 child.put(character, node);
             }
             child = node.getChildren();
@@ -39,11 +38,38 @@ public class Trie {
         }
     }
 
-    public boolean search(){
-        return false;
+    //busca funcionando
+    public boolean search(String text){
+        HashMap<Character, TrieNode> child = root.getChildren();
+        TrieNode node = null;
+
+        for(int i = 0; i < text.length(); i++){
+            char character = text.charAt(i);
+            if(child.containsKey(character)){
+                node = child.get(character);
+                child = node.getChildren();
+            } else {
+                node = null;
+                break;
+            }
+        }
+
+        if(node != null && node.isWord()){
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
+    //TODO fazer o método de remoção
     public void remove(String text){
+        if(this.search(text)){
 
+        } else {
+            
+        }
     }
+
+    //TODO fazer método de autocompletar
 }
