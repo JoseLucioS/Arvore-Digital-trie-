@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Trie {
     private TrieNode root;
+    private List<String> words = new ArrayList<>();
 
     public TrieNode getRoot() {
         return root;
@@ -98,33 +99,104 @@ public class Trie {
     }
 
     //TODO fazer método de autocompletar
+
+//    public List autocomplete(String prefix){
+//        TrieNode node = searchNode(prefix);
+//        List<String> list;
+//
+//        list = searchWords(node);
+//        System.out.println(list);
+//
+//        return list;
+//
+//    }
+//
+//    private TrieNode searchNode(String prefix){
+//
+//        TrieNode node = getRoot();
+//
+//        for(int i = 0; i < prefix.length(); i++){
+//            char character = prefix.charAt(i);
+//            TrieNode newNode = node.getChildren().get(character);
+//
+//            if(newNode == null){
+//                return null;
+//            }
+//
+//            node = newNode;
+//
+//        }
+//
+//        return node;
+//    }
+//
+//    private List searchWords(TrieNode node){
+//        List<String> list = new ArrayList<>();
+//
+//        if(node.isWord()){
+//            list.add(node.getText());
+//        }
+//
+//        if(!node.getChildren().isEmpty()){
+//            for (TrieNode son: node.getChildren().values()) {
+//                list.addAll(searchWords(son));
+//            }
+//        }
+//
+//        return list;
+//    }
+
+
     public List autocomplete(String prefix){
         HashMap<Character, TrieNode> child = root.getChildren();
         List<String> words = new ArrayList<String>();
         StringBuilder word = new StringBuilder();
-        TrieNode node;
+        TrieNode node = new TrieNode();
 
         //percorrer até achar node com o último caracter do prefixo, só então começar a procurar por palavras
         //correspondentes e guardá-las no arraylist
         for(int i = 0; i < prefix.length(); i++){
             char character = prefix.charAt(i);
             if(child.containsKey(character)){
-                word.append(character);
+                //word.append(character);
                 node = child.get(character);
                 child = node.getChildren();
             } else {
                 System.out.println("Não existem palavras com esse prefixo");
+                return null;
             }
         }
 
-        
+        words = searchWords(node);
 
         Collections.sort(words);
         return words;
+    }
+
+    public List searchWords(TrieNode node){
+        List<String> list = new ArrayList<>();
+
+        if(node.isWord()){
+            list.add(""+node.getText());
+        }
+
+        if(node.getChildren().isEmpty()){
+            return list;
+        } else {
+            for (char c: node.getChildren().keySet()) {
+                List<String> childs = searchWords(node.getChildren().get(c));
+                for(String s : childs){
+                    list.add(node.getText()+"");
+                }
+            }
+
+            return list;
+        }
     }
 
     //TODO fazer a sobrecarga do método de autocompletar
 //    public List<String> autocomplete(String prefix, int size){
 //
 //    }
+
 }

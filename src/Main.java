@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         //TODO criar programa para listar as palavras através da linha de comando
@@ -20,6 +24,9 @@ public class Main {
 
         trie.remove("amado");
         System.out.println("achou amadores? " + trie.search("amadores"));
+
+        List<String> list = trie.autocomplete("ama");
+
 
     }
 }

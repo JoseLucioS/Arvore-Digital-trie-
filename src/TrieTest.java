@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class TrieTest {
@@ -64,6 +67,24 @@ public class TrieTest {
         assertTrue(trie.search("maravilha"));
         assertFalse(trie.search("marcado"));
         assertTrue(trie.search("mar"));
+
+    }
+
+
+    @Test
+    public void MustAutoComplete(){
+        Trie trie = new Trie();
+        List<String> list = trie.autocomplete("mar");
+        trie.insert("maravilha");
+        trie.insert("mar");
+        trie.insert("marcado");
+        trie.insert("pokemon");
+
+        Collections.sort(list);
+
+        assertTrue(list.get(0).equals("mar"));
+        assertTrue(list.get(1).equals("maravilha"));
+        assertTrue(list.get(2).equals("marcado"));
 
     }
 
