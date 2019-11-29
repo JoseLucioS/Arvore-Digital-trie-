@@ -100,53 +100,6 @@ public class Trie {
 
     //TODO fazer método de autocompletar
 
-//    public List autocomplete(String prefix){
-//        TrieNode node = searchNode(prefix);
-//        List<String> list;
-//
-//        list = searchWords(node);
-//        System.out.println(list);
-//
-//        return list;
-//
-//    }
-//
-//    private TrieNode searchNode(String prefix){
-//
-//        TrieNode node = getRoot();
-//
-//        for(int i = 0; i < prefix.length(); i++){
-//            char character = prefix.charAt(i);
-//            TrieNode newNode = node.getChildren().get(character);
-//
-//            if(newNode == null){
-//                return null;
-//            }
-//
-//            node = newNode;
-//
-//        }
-//
-//        return node;
-//    }
-//
-//    private List searchWords(TrieNode node){
-//        List<String> list = new ArrayList<>();
-//
-//        if(node.isWord()){
-//            list.add(node.getText());
-//        }
-//
-//        if(!node.getChildren().isEmpty()){
-//            for (TrieNode son: node.getChildren().values()) {
-//                list.addAll(searchWords(son));
-//            }
-//        }
-//
-//        return list;
-//    }
-
-
     public List autocomplete(String prefix){
         HashMap<Character, TrieNode> child = root.getChildren();
         List<String> words = new ArrayList<String>();
