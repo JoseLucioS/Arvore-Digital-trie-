@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Trie {
     private TrieNode root;
-    private List<String> words = new ArrayList<>();
 
     public TrieNode getRoot() {
         return root;
@@ -26,7 +25,7 @@ public class Trie {
             if(child.containsKey(character)){
                 node = child.get(character);
             } else {
-                node.setText(character);
+                node.setText(character+"");
                 child.put(character, node);
             }
             child = node.getChildren();
@@ -100,10 +99,24 @@ public class Trie {
 
     //TODO fazer método de autocompletar
 
+//    public List<String> autocomplete(String prefix){
+//        TrieNode node = root;
+//
+//        for(char ch : prefix.toCharArray()){
+//            if(!node.getChildren().containsKey(ch)){
+//                return Collections.emptyList();
+//            }
+//            node = node.getChildren().get(ch);
+//        }
+//
+//        return node.getPrefixes();
+//    }
+
+
     public List autocomplete(String prefix){
         HashMap<Character, TrieNode> child = root.getChildren();
         List<String> words = new ArrayList<String>();
-        StringBuilder word = new StringBuilder();
+        //StringBuilder word = new StringBuilder();
         TrieNode node = new TrieNode();
 
         //percorrer até achar node com o último caracter do prefixo, só então começar a procurar por palavras
@@ -139,9 +152,18 @@ public class Trie {
             for (char c: node.getChildren().keySet()) {
                 List<String> childs = searchWords(node.getChildren().get(c));
                 for(String s : childs){
-                    list.add(node.getText()+"");
+                    list.add(node.getText()+s);
+                    //System.out.println(s);
                 }
             }
+
+            //gambiarra pra ajustar a letra inicial das palavras
+//            String pre = prefix.charAt(0)+"";
+//            for(int i = 0; i < list.size(); i++){
+//                String fullWord;
+//                fullWord = pre + list.get(i);
+//                list.add(fullWord);
+//            }
 
             return list;
         }

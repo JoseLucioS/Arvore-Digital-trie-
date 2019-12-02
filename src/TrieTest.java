@@ -82,9 +82,10 @@ public class TrieTest {
 
         Collections.sort(list);
 
-        assertTrue(list.get(0).equals("mar"));
-        assertTrue(list.get(1).equals("maravilha"));
-        assertTrue(list.get(2).equals("marcado"));
+        assertTrue(list.contains("mar"));
+        assertTrue(list.contains("maravilha"));
+        assertTrue(list.contains("marcado"));
+        assertFalse(list.contains("pokemon"));
 
     }
 

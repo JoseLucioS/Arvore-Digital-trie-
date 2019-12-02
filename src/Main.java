@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         //TODO criar programa para listar as palavras através da linha de comando
         //TODO criar arquivo .jar
-        //TODO criar a classe de testes
+
         Trie trie = new Trie();
         trie.insert("amar");
         trie.insert("ameixa");
@@ -25,7 +25,12 @@ public class Main {
         trie.remove("amado");
         System.out.println("achou amadores? " + trie.search("amadores"));
 
-        List<String> list = trie.autocomplete("ama");
+        List<String> list = new ArrayList<>();
+        list = trie.autocomplete("am");
+
+        for (String s : list) {
+            System.out.println(s);
+        }
 
 
     }

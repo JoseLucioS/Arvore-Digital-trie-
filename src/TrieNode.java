@@ -1,16 +1,16 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class TrieNode {
     private boolean isWord;
     private HashMap<Character, TrieNode> children;
-    private char text;
+    private String text;
 
     public TrieNode(){
         this.isWord = false;
         this.children = new HashMap<Character, TrieNode>();
     }
 
-    public TrieNode(char text){
+    public TrieNode(String text){
         this.isWord = false;
         this.children = new HashMap<Character, TrieNode>();
         this.text = text;
@@ -32,11 +32,28 @@ public class TrieNode {
         this.children = children;
     }
 
-    public char getText() {
+    public String getText() {
         return text;
     }
 
-    public void setText(char text) {
+    public void setText(String text) {
         this.text = text;
+    }
+
+    public List<String> getPrefixes() {
+        List<String> words = new ArrayList<>();
+
+        if(this.isWord()){
+            words.add(this.getText()+"");
+        }
+
+        for(Map.Entry<Character, TrieNode> input : children.entrySet()){
+            TrieNode c = input.getValue();
+            System.out.println(c.getText());
+            List<String> cp = c.getPrefixes();
+            words.addAll(cp);
+        }
+
+        return words;
     }
 }
