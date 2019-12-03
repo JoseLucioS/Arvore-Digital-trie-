@@ -14,6 +14,8 @@ public class Main {
         trie.insert("ameba");
         trie.insert("arvore");
         trie.insert("amadores");
+        trie.insert("arbitro");
+        trie.insert("armazenar");
 
         System.out.println("achou amado? " + trie.search("amado"));
         System.out.println("achou amadores? " + trie.search("amadores"));
@@ -31,7 +33,6 @@ public class Main {
         for (String s : list) {
             System.out.println(s);
         }
-
 
     }
 }

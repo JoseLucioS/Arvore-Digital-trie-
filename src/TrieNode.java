@@ -56,4 +56,23 @@ public class TrieNode {
 
         return words;
     }
+
+    protected List<String> getSuffixes() {
+
+        List<String> words = new ArrayList<>();
+
+        if(isWord()){
+            words.add(getText());
+            return words;
+        }
+
+        for(TrieNode child : children.values()){
+            List<String> chWords = child.getSuffixes();
+            for (String chWord : chWords) {
+                words.add(text + chWord);
+            }
+        }
+
+        return words;
+    }
 }
