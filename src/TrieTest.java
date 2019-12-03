@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -74,18 +74,23 @@ public class TrieTest {
     @Test
     public void MustAutoComplete(){
         Trie trie = new Trie();
-        List<String> list = trie.autocomplete("mar");
+        List<String> list = new ArrayList<>();
+
         trie.insert("maravilha");
         trie.insert("mar");
         trie.insert("marcado");
         trie.insert("pokemon");
+        trie.insert("palito");
 
-        Collections.sort(list);
+        list = trie.autocomplete("mar");
 
-        assertTrue(list.contains("mar"));
-        assertTrue(list.contains("maravilha"));
-        assertTrue(list.contains("marcado"));
-        assertFalse(list.contains("pokemon"));
+        assertTrue(list.get(0).equals("mar"));
+
+        list = trie.autocomplete("po");
+
+        assertTrue(list.get(0).equals("pokemon"));
+        assertFalse(list.get(0).equals("palito"));
+
 
     }
 

@@ -20,4 +20,6 @@ maremoto
 magic
 gilgamesh
 enkidu
+charmander
+infernape
 

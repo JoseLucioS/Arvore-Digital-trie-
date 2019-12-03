@@ -127,13 +127,46 @@ public class Trie {
             words.set(i, prefix + suffix);
         }
 
-        //Collections.sort(words);
+        Collections.sort(words, Comparator.comparingInt(String::length));
         return words;
     }
 
-    //TODO fazer a sobrecarga do método de autocompletar
-//    public List<String> autocomplete(String prefix, int size){
-//
-//    }
+    //sobrecarga funcionando
+    public List<String> autocomplete(String prefix, int size){
+
+        HashMap<Character, TrieNode> child = root.getChildren();
+        List<String> words = new ArrayList<String>();
+        TrieNode node = root;
+
+        //percorre até encontrar o último caracter do prefixo
+        for(int i = 0; i < prefix.length(); i++){
+            char character = prefix.charAt(i);
+            if(child.containsKey(character)){
+                node = child.get(character);
+                child = node.getChildren();
+            } else {
+                System.out.println("Não existem palavras com esse prefixo");
+                return null;
+            }
+        }
+
+        //System.out.println(node.getText());
+
+        words = node.getSuffixes();
+        prefix = prefix.substring(0, prefix.length() - 1);
+
+        for (int i = 0; i < words.size(); i++) {
+            String suffix = words.get(i);
+            words.set(i, prefix + suffix);
+        }
+
+        Collections.sort(words, Comparator.comparingInt(String::length));
+
+        for (int i = words.size() - 1; i >= size; i--) {
+            words.remove(i);
+        }
+
+        return words;
+    }
 
 }

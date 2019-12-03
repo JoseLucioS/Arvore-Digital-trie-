@@ -34,5 +34,12 @@ public class Main {
             System.out.println(s);
         }
 
+        List<String> list2 = trie.autocomplete("am", 3);
+
+        System.out.println("");
+        for (String s : list2) {
+            System.out.println(s);
+        }
+
     }
 }
