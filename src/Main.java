@@ -9,7 +9,7 @@ public class Main {
         Trie trie = new Trie();
         if(args.length < 2){
             System.out.println("Script inválido. Tente o seguinte:");
-            System.out.println("java -jar trie.jar arquivo.txt prefixo tamanhoDoRetorno");
+            System.out.println("java -jar Arvore-Digital-trie-.jar arquivo.txt prefixo tamanhoDoRetorno");
 
         } else if(args.length < 3){
             try {
