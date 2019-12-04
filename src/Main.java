@@ -1,44 +1,74 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO criar programa para listar as palavras através da linha de comando
-        //TODO criar arquivo .jar
 
         Trie trie = new Trie();
-        trie.insert("amar");
-        trie.insert("ameixa");
-        trie.insert("amado");
-        trie.insert("ameba");
-        trie.insert("arvore");
-        trie.insert("amadores");
-        trie.insert("arbitro");
-        trie.insert("armazenar");
+        if(args.length < 2){
+            System.out.println("Script inválido. Tente o seguinte:");
+            System.out.println("java -jar trie.jar arquivo.txt prefixo tamanhoDoRetorno");
 
-        System.out.println("achou amado? " + trie.search("amado"));
-        System.out.println("achou amadores? " + trie.search("amadores"));
+        } else if(args.length < 3){
+            try {
+                FileReader file = new FileReader(args[0]);
+                BufferedReader readFile = new BufferedReader(file);
+                String word = readFile.readLine();
 
-        trie.remove("amado");
-        System.out.println("após remoção:");
-        System.out.println("achou amado? " + trie.search("amado"));
+                while(word != null){
+                    trie.insert(word);
+                    word = readFile.readLine();
+                }
 
-        trie.remove("amado");
-        System.out.println("achou amadores? " + trie.search("amadores"));
+                file.close();
 
-        List<String> list = new ArrayList<>();
-        list = trie.autocomplete("am");
+                List<String> list;
+                list = trie.autocomplete(args[1]);
+                //list = trie.autocomplete("am"); //testando antes de gerar o .jar - OK
+                for (String s : list) {
+                    System.out.println(s);
+                }
 
-        for (String s : list) {
-            System.out.println(s);
-        }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        List<String> list2 = trie.autocomplete("am", 3);
+        } else {
 
-        System.out.println("");
-        for (String s : list2) {
-            System.out.println(s);
+            try {
+                FileReader file = new FileReader(args[0]);
+                BufferedReader readFile = new BufferedReader(file);
+                String word = readFile.readLine();
+
+                while(word != null){
+                    trie.insert(word);
+                    word = readFile.readLine();
+                }
+
+                file.close();
+
+                List<String> list;
+                int value = Integer.valueOf(String.valueOf(args[2]));
+                list = trie.autocomplete(args[1], value);
+
+                for (String s : list) {
+                    System.out.println(s);
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
     }

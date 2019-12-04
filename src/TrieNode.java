@@ -63,7 +63,7 @@ public class TrieNode {
 
         if(isWord()){
             words.add(getText());
-            return words;
+            //return words; //esse trecho tava bugando o retorno de algumas palavras, mas o programa ainda funciona "normalmente"
         }
 
         for(TrieNode child : children.values()){
